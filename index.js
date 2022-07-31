@@ -1,5 +1,8 @@
 function fetchBooks() {
   //write fetch request to the Game of Thrones API
+  fetch('https://anapioficeandfire.com/api/books')
+  .then(resp => resp.json())
+  .then(json => renderBooks(json));
 }
 
 function renderBooks(json) {
@@ -14,3 +17,36 @@ function renderBooks(json) {
 document.addEventListener('DOMContentLoaded', function() {
   fetchBooks()
 })
+
+// promises
+
+let gotAJob = true;
+
+const willGetNewPhone = new Promise((resolve, rejected) => {
+
+  if(gotAJob) {
+    const phone = {
+      brand: 'Samsung',
+      color: 'Blue'
+    }
+    return resolve(phone)
+  }
+  else{
+    return rejected('No Phone')
+  }
+});
+
+const askYourself = () => {
+willGetNewPhone.then((fulfilled) => {
+  console.log(fulfilled)
+}).catch ((error) => {
+  console.log(error)
+})
+}
+
+askYourself()
+// promises - keyword fetch
+fetch("https://api.open-notify.org/astros.json")
+.then( resp => console.log("yay"))
+.catch( error => console.error(`Oh no! ${error}`));
+// promises - keyword await
